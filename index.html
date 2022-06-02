@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      const rootElement = document.getElementById("root");
+
+      const App = () => {
+        const [keyword, setKeyword] = React.useState("");
+        const [result, setResult] = React.useState();
+        const [typing, setTyping] = React.useState(false);
+        console.log("render");
+
+        function handleChange(event) {
+          console.log("handelChange ~~~~~~~");
+          setKeyword(event.target.value);
+          setTyping(true);
+        }
+
+        function handleClick() {
+          setTyping(false);
+          setResult(`We find results of ${keyword}`);
+        }
+
+        return (
+          <>
+            <input onChange={handleChange} />
+            <button onClick={handleClick}>Search</button>
+            <p>{typing ? `Looking for ${keyword}...` : result}</p>
+          </>
+        );
+      };
+      function render() {
+        ReactDOM.render(<App />, rootElement);
+      }
+
+      render();
+    </script>
+  </body>
+</html>
